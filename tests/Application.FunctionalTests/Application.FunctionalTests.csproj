@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>FinalProject.Application.FunctionalTests</RootNamespace>
+      <AssemblyName>FinalProject.Application.FunctionalTests</AssemblyName>
+  </PropertyGroup>
+
+    <ItemGroup>
+<None Remove="appsettings.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="appsettings.json">
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+      <PackageReference Include="Microsoft.Data.SqlClient" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" />
+      <PackageReference Include="xunit.v3" />
+      <PackageReference Include="xunit.runner.visualstudio">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+      <PackageReference Include="coverlet.collector">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+ </PackageReference>
+      <PackageReference Include="Moq" />
+      <PackageReference Include="Respawn" />
+    <PackageReference Include="Shouldly" />
+      <PackageReference Include="System.Configuration.ConfigurationManager" />
+      <PackageReference Include="Testcontainers.MsSql" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Web\Web.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="TodoLists\Commands\" />
+    <Folder Include="TodoLists\Queries\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="FluentAssertions">
+        <HintPath>..\..\..\..\..\.nuget\packages\fluentassertions\7.0.0\lib\net6.0\FluentAssertions.dll</HintPath>
+ </Reference>
+    </ItemGroup>
+
+</Project>

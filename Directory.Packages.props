@@ -1,0 +1,66 @@
+<!-- For more info on central package management go to https://devblogs.microsoft.com/nuget/introducing-central-package-management/ -->
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Architecture & Patterns -->
+    <PackageVersion Include="Ardalis.GuardClauses" Version="$(GuardClausesVersion)" />
+    <PackageVersion Include="Ardalis.Specification.EntityFrameworkCore" Version="$(ArdalislSpecificationVersion)" />
+    <PackageVersion Include="MediatR" Version="$(MediatRVersion)" />
+    
+    <!-- Azure -->
+    <PackageVersion Include="Azure.Identity" Version="$(AzureIdentityVersion)" />
+    
+    <!-- Validation & Mapping -->
+    <PackageVersion Include="FluentValidation" Version="$(FluentValidationVersion)" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="$(FluentValidationVersion)" />
+    <PackageVersion Include="Mapster" Version="$(MapsterVersion)" />
+    <PackageVersion Include="Mapster.DependencyInjection" Version="$(MapsterDIVersion)" />
+    
+    <!-- API & Documentation -->
+    <PackageVersion Include="FastEndpoints" Version="$(FastEndpointsVersion)" />
+    <PackageVersion Include="FastEndpoints.Swagger" Version="$(FastEndpointsVersion)" />
+    <PackageVersion Include="NSwag.AspNetCore" Version="$(NSwagVersion)" />
+    <PackageVersion Include="Scalar.AspNetCore" Version="$(ScalarAspNetCoreVersion)" />
+    
+    <!-- Microsoft ASP.NET Core -->
+    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.UI" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(MicrosoftExtensionsVersion)" />
+    
+    <!-- Microsoft Entity Framework Core -->
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EntityFrameworkCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EntityFrameworkCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(EntityFrameworkCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(EntityFrameworkCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EntityFrameworkCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EntityFrameworkCoreVersion)" />
+    
+    <!-- Microsoft Extensions -->
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(MicrosoftExtensionsVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="$(MicrosoftExtensionsVersion)" />
+    
+    <!-- Database -->
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="$(DataSqlClientVesion)" />
+    
+    <!-- Testing -->
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="$(NETTestSdkVersion)" />
+    <PackageVersion Include="coverlet.collector" Version="$(CoverletCollectorVersion)" />
+    <PackageVersion Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
+    <PackageVersion Include="Moq" Version="$(MoqVersion)" />
+    <PackageVersion Include="Respawn" Version="$(RespawnVersion)" />
+    <PackageVersion Include="Shouldly" Version="$(ShouldlyVersion)" />
+    <PackageVersion Include="Testcontainers.MsSql" Version="$(TestcontainersMsSqlVersion)" />
+    
+    <!-- Testing - xUnit -->
+    <PackageVersion Include="xunit.runner.visualstudio" Version="$(XUnitRunnerVisualstudio)" />
+    <PackageVersion Include="xunit.v3" Version="$(XUnit3Version)" />
+    
+    <!-- System -->
+    <PackageVersion Include="System.Configuration.ConfigurationManager" Version="$(SystemConfigurationVersion)" />
+  </ItemGroup>
+</Project>

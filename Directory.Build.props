@@ -1,0 +1,61 @@
+﻿<!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <!--<ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>-->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <!-- Core Framework Versions -->
+    <AspireVersion>9.5.1</AspireVersion>
+    <AspnetVersion>9.0.10</AspnetVersion>
+    <DotnetVersion>9.0.10</DotnetVersion>
+    <MicrosoftExtensionsVersion>9.0.10</MicrosoftExtensionsVersion>
+
+    <!-- Database & Data Access -->
+    <DataSqlClientVesion>5.2.2</DataSqlClientVesion>
+    <EntityFrameworkCoreVersion>9.0.10</EntityFrameworkCoreVersion>
+
+    <!-- Architecture & Patterns -->
+    <GuardClausesVersion>5.0.0</GuardClausesVersion>
+    <MediatRVersion>12.4.1</MediatRVersion>
+    <ArdalislSpecificationVersion>8.0.0</ArdalislSpecificationVersion>
+
+    <!-- Validation & Mapping -->
+    <FluentValidationVersion>11.11.0</FluentValidationVersion>
+    <MapsterVersion>7.4.0</MapsterVersion>
+    <MapsterDIVersion>1.0.1</MapsterDIVersion>
+    <AutoMapperVersion>13.0.1</AutoMapperVersion>
+
+    <!-- API & Documentation -->
+    <FastEndpointsVersion>5.31.0</FastEndpointsVersion>
+    <ScalarAspNetCoreVersion>1.2.42</ScalarAspNetCoreVersion>
+    <NSwagVersion>14.2.0</NSwagVersion>
+
+    <!-- Azure -->
+    <AzureConfigurationSecretsVersion>1.3.1</AzureConfigurationSecretsVersion>
+    <AzureIdentityVersion>1.13.1</AzureIdentityVersion>
+
+    <!-- Testing -->
+    <NETTestSdkVersion>17.12.0</NETTestSdkVersion>
+    <CoverletCollectorVersion>6.0.4</CoverletCollectorVersion>
+    <MoqVersion>4.20.72</MoqVersion>
+    <FluentAssertionsVersion>7.0.0</FluentAssertionsVersion>
+    <ShouldlyVersion>4.3.0</ShouldlyVersion>
+    <RespawnVersion>6.2.1</RespawnVersion>
+
+    <!-- Testing - xUnit -->
+    <XUnit3Version>3.1.0</XUnit3Version>
+    <XUnitRunnerVisualstudio>3.1.5</XUnitRunnerVisualstudio>
+
+    <!-- Testing - Integration -->
+    <TestcontainersMsSqlVersion>4.8.0</TestcontainersMsSqlVersion>
+
+    <!-- System -->
+    <SystemConfigurationVersion>9.0.10</SystemConfigurationVersion>
+  </PropertyGroup>
+
+</Project>
