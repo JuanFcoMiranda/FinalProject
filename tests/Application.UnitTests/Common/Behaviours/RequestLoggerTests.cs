@@ -23,7 +23,7 @@ public class RequestLoggerTests
 
         var requestLogger = new LoggingBehaviour<CreateTodoItemCommand>(_logger.Object, _user.Object, _identityService.Object);
 
-        await requestLogger.Process(new CreateTodoItemCommand { Title = "title" }, new CancellationToken());
+        await requestLogger.Process(new CreateTodoItemCommand { Title = "title" }, CancellationToken.None);
 
         _identityService.Verify(i => i.GetUserNameAsync(It.IsAny<string>()), Times.Once);
     }
@@ -37,7 +37,7 @@ public class RequestLoggerTests
 
         var requestLogger = new LoggingBehaviour<CreateTodoItemCommand>(_logger.Object, _user.Object, _identityService.Object);
 
-        await requestLogger.Process(new CreateTodoItemCommand { Title = "title" }, new CancellationToken());
+        await requestLogger.Process(new CreateTodoItemCommand { Title = "title" }, CancellationToken.None);
 
         _identityService.Verify(i => i.GetUserNameAsync(It.IsAny<string>()), Times.Never);
     }

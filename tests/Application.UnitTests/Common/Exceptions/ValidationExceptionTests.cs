@@ -59,57 +59,57 @@ public class ValidationExceptionTests
     }
 
     [Fact]
-public void DefaultConstructorShouldSetValidationErrorsToEmptyDictionary()
-{
-    var actual = new ValidationException().Errors;
-
-    actual.Keys.ShouldBeEmpty();
-}
-
-[Fact]
-public void SingleValidationFailureShouldSetValidationErrors()
-{
-    var failures = new List<ValidationFailure>
-{
-        new("Name", "must not be empty"),
-    };
-
-    var actual = new ValidationException(failures).Errors;
-
-    actual.Keys.ShouldContain("Name");
-    actual["Name"].ShouldContain("must not be empty");
-}
-
-[Fact]
-public void MultipleValidationFailuresForMultiplePropertiesShouldSetValidationErrors()
-{
- var failures = new List<ValidationFailure>
+    public void DefaultConstructorShouldSetValidationErrorsToEmptyDictionary()
     {
-  new("Name", "must not be empty"),
-     new("Age", "must be 18 or older"),
-    };
+        var actual = new ValidationException().Errors;
 
-    var actual = new ValidationException(failures).Errors;
+        actual.Keys.ShouldBeEmpty();
+    }
 
-actual.Keys.ShouldContain("Name");
-    actual["Name"].ShouldContain("must not be empty");
-    actual.Keys.ShouldContain("Age");
-actual["Age"].ShouldContain("must be 18 or older");
-}
-
-[Fact]
-public void MultipleValidationFailuresForSamePropertyShouldBeInTheSameCollection()
-{
-var failures = new List<ValidationFailure>
+    [Fact]
+    public void SingleValidationFailureShouldSetValidationErrors()
     {
- new("Name", "must not be empty"),
-        new("Name", "must not exceed 10 characters"),
-    };
+        var failures = new List<ValidationFailure>
+        {
+            new("Name", "must not be empty")
+        };
 
-    var actual = new ValidationException(failures).Errors;
+        var actual = new ValidationException(failures).Errors;
 
-actual.Keys.ShouldContain("Name");
-    actual["Name"].ShouldContain("must not be empty");
-    actual["Name"].ShouldContain("must not exceed 10 characters");
-}
+        actual.Keys.ShouldContain("Name");
+        actual["Name"].ShouldContain("must not be empty");
+    }
+
+    [Fact]
+    public void MultipleValidationFailuresForMultiplePropertiesShouldSetValidationErrors()
+    {
+        var failures = new List<ValidationFailure>
+        {
+            new("Name", "must not be empty"),
+            new("Age", "must be 18 or older"),
+        };
+
+        var actual = new ValidationException(failures).Errors;
+
+        actual.Keys.ShouldContain("Name");
+        actual["Name"].ShouldContain("must not be empty");
+        actual.Keys.ShouldContain("Age");
+        actual["Age"].ShouldContain("must be 18 or older");
+    }
+
+    [Fact]
+    public void MultipleValidationFailuresForSamePropertyShouldBeInTheSameCollection()
+    {
+        var failures = new List<ValidationFailure>
+        {
+            new("Name", "must not be empty"),
+            new("Name", "must not exceed 10 characters")
+        };
+
+        var actual = new ValidationException(failures).Errors;
+
+        actual.Keys.ShouldContain("Name");
+        actual["Name"].ShouldContain("must not be empty");
+        actual["Name"].ShouldContain("must not exceed 10 characters");
+    }
 }

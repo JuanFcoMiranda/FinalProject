@@ -35,7 +35,7 @@ public class MappingTests
         // Fix CS8604: Ensure 'instance' is not null before passing to Adapt
         Assert.NotNull(instance);
 
-        var result = TypeAdapter.Adapt(instance, source, destination, _config);
+        var result = instance.Adapt(source, destination, _config);
 
         Assert.NotNull(result);
     }

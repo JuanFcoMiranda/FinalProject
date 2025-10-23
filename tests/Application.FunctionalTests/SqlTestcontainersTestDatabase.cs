@@ -45,15 +45,9 @@ public class SqlTestcontainersTestDatabase : ITestDatabase
         _respawner = await Respawner.CreateAsync(_connectionString);
     }
 
-    public DbConnection GetConnection()
-    {
-        return _connection;
-    }
+    public DbConnection GetConnection() => _connection;
 
-    public string GetConnectionString()
-    {
-        return _connectionString;
-    }
+    public string GetConnectionString() => _connectionString;
 
     public async Task ResetAsync()
     {
