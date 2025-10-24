@@ -1,26 +1,88 @@
-name: Azure deployment
+name: .NET Core CI/CD
 
 on:
-  workflow_dispatch:
   push:
-    # Run when commits are pushed to mainline branch (main or master)
-    # Set this to the mainline branch you are using
-    branches:
-      - main
-      - master
+    branches: [ master ]
 
-# GitHub Actions workflow to deploy to Azure using azd
-# To configure required secrets for connecting to Azure, simply run `azd pipeline config`
+env:
+  DOTNET_VERSION: 9.x
+  SCANNER_VERSION: 10.x
+  BUILD_CONFIG: Release
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      build_config: Release
+    
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+      name: Checkout
+      with:
+        # Disabling shallow clones is recommended for improving the relevancy of reporting
+        fetch-depth: 0
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        global-json-file: global.json
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+    
+    - name: .NET Restore
+      run:  dotnet restore
+
+    # - name: SonarQube Begin
+    #   run: | 
+    #       dotnet tool install --global dotnet-sonarscanner
+    #       dotnet tool install --global dotnet-coverage
+    #       dotnet sonarscanner begin /o:${{ secrets.SONAR_ORGANIZATION }} /k:${{ secrets.SONAR_PROJECT_KEY }} /d:sonar.token=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+    
+    - name: .NET Build
+      run: dotnet build --configuration $BUILD_CONFIG --no-restore
+    
+    - name: .NET Test with Coverage
+      run: dotnet test --configuration $BUILD_CONFIG --no-build --collect:"XPlat Code Coverage" 
+
+    - name: Collect Data
+      run: dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
+
+    # - name: SonarQube End
+    #   run: dotnet sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # - name: Run Trivy vulnerability scanner
+    #   uses: aquasecurity/trivy-action@0.28.0
+    #   with:
+    #     scan-type: "fs"
+    #     exit-code: '1'
+    #     ignore-unfixed: true
+    #     vuln-type: 'os,library'
+    #     format: 'sarif'
+    #     output: 'trivy-results.sarif'
+    #     severity: 'CRITICAL,HIGH'
+
+    # - name: Upload Trivy scan results to GitHub Security tab
+    #   uses: github/codeql-action/upload-sarif@v3
+    #   with:
+    #     sarif_file: 'trivy-results.sarif'
+    
+    - name: Publish Site
+      working-directory: ./src/TrisvagoHotels.Host
+      run: dotnet publish -c $BUILD_CONFIG --no-restore -o ../Publish
+        
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: web_site
+        path: ./src/Publish
+
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+      - name: Download Site
+        uses: actions/download-artifact@v4
         with:
-          global-json-file: 'global.json'
+          name: web_site
+          path: web_site
