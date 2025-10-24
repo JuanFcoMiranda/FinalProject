@@ -2,7 +2,9 @@ name: .NET Core CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - main
 
 env:
   DOTNET_VERSION: 9.x
