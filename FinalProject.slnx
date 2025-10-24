@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
-    <File Path=".github/workflows/azure-dev.yml" />
+    <File Path=".github/workflows/netcore-cicd.yml" />
     <File Path=".github/workflows/pr-verify.yml" />
     <File Path=".gitignore" />
     <File Path="Directory.Build.props" />
