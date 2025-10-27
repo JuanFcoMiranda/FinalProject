@@ -108,7 +108,7 @@ jobs:
 
          # Reemplaza tu step actual "Test Summary" con este:
     - name: Test Report
-      uses: dorny/test-reporter@v1
+      uses: dorny/test-reporter@v2
       if: always()
       with:
         name: Test Results
