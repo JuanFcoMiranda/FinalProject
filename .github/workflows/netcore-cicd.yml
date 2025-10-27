@@ -21,6 +21,10 @@ jobs:
     env:
       build_config: Release
     
+    permissions:
+      checks: write
+      pull-requests: write
+
     steps:
     - uses: actions/checkout@v4
       name: Checkout
