@@ -114,7 +114,7 @@ jobs:
         name: Test Results
         path: "**/*.trx"
         reporter: dotnet-trx
-        only-summary: true
+        #only-summary: true
         use-actions-summary: true
 
     # - name: Publish Test Results
