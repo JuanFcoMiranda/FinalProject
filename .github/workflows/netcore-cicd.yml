@@ -97,12 +97,19 @@ jobs:
 
     - name: Upload Coverage Files
       run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
-        
+
+    - name: Test Summary
+      uses: test-summary/action@v2
+      with:
+        paths: ${{ github.workspace }}/**/TestResults/**/*
+        output: test-summary.md
+      if: always()
+
     - name: Upload Test Result Files
       uses: actions/upload-artifact@v5
       with:
-        name: test-results
-        path: ${{ github.workspace }}/**/TestResults/**/*
+        name: test-summary
+        path: test-summary.md
         retention-days: 5
 
     # - name: Publish Test Results
