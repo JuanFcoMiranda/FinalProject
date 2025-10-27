@@ -92,57 +92,16 @@ jobs:
     - name: Upload Coverage Files
       run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
 
-    # - name: Test Summary
-    #   uses: test-summary/action@v2
-    #   if: always()
-    #   with:
-    #     paths: ${{ github.workspace }}/**/TestResults/**/*
-    #     output: test-summary.md
-
-    # - name: Upload Test Result Files
-    #   uses: actions/upload-artifact@v5
-    #   with:
-    #     name: test-summary
-    #     path: test-summary.md
-    #     retention-days: 5
-
-         # Reemplaza tu step actual "Test Summary" con este:
     - name: Test Report
       uses: dorny/test-reporter@v2
       if: always()
       with:
         name: Test Results
+        report-title: Test Results
         path: "**/*.trx"
         reporter: dotnet-trx
         #only-summary: true
         use-actions-summary: true
-
-    # - name: Publish Test Results
-    #   uses: EnricoMi/publish-unit-test-result-action@v2
-    #   if: always()
-    #   with:
-    #     files: "${{ github.workspace }}/**/*.trx"
-
-    # - name: SonarQube End
-    #   run: dotnet sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    # - name: Run Trivy vulnerability scanner
-    #   uses: aquasecurity/trivy-action@0.28.0
-    #   with:
-    #     scan-type: "fs"
-    #     exit-code: '1'
-    #     ignore-unfixed: true
-    #     vuln-type: 'os,library'
-    #     format: 'sarif'
-    #     output: 'trivy-results.sarif'
-    #     severity: 'CRITICAL,HIGH'
-
-    # - name: Upload Trivy scan results to GitHub Security tab
-    #   uses: github/codeql-action/upload-sarif@v3
-    #   with:
-    #     sarif_file: 'trivy-results.sarif'
     
     - name: Publish Site
       working-directory: src/Web
