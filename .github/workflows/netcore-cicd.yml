@@ -115,6 +115,7 @@ jobs:
         path: "**/*.trx"
         reporter: dotnet-trx
         only-summary: true
+        use-actions-summary: true
 
     # - name: Publish Test Results
     #   uses: EnricoMi/publish-unit-test-result-action@v2
