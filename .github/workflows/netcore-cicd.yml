@@ -88,30 +88,33 @@ jobs:
         indicators: true
         output: both
         thresholds: "10 30"
-        
-    # - name: Add Coverage PR Comment
-    #   uses: marocchino/sticky-pull-request-comment@v2
-    #   # if: github.event_name == 'pull_request'
-    #   with:
-    #     recreate: true
-    #     path: code-coverage-results.md
 
     - name: Upload Coverage Files
       run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
 
-    - name: Test Summary
-      uses: test-summary/action@v2
-      with:
-        paths: ${{ github.workspace }}/**/TestResults/**/*
-        output: test-summary.md
-      if: always()
+    # - name: Test Summary
+    #   uses: test-summary/action@v2
+    #   if: always()
+    #   with:
+    #     paths: ${{ github.workspace }}/**/TestResults/**/*
+    #     output: test-summary.md
 
-    - name: Upload Test Result Files
-      uses: actions/upload-artifact@v5
+    # - name: Upload Test Result Files
+    #   uses: actions/upload-artifact@v5
+    #   with:
+    #     name: test-summary
+    #     path: test-summary.md
+    #     retention-days: 5
+
+         # Reemplaza tu step actual "Test Summary" con este:
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
       with:
-        name: test-summary
-        path: test-summary.md
-        retention-days: 5
+        name: Test Results
+        path: "**/*.trx"
+        reporter: dotnet-trx
+        output-to: 'step-summary'
 
     # - name: Publish Test Results
     #   uses: EnricoMi/publish-unit-test-result-action@v2
