@@ -22,6 +22,7 @@ jobs:
       build_config: Release
     
     permissions:
+      contents: read
       checks: write
       pull-requests: write
 
