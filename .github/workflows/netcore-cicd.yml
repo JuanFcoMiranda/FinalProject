@@ -47,8 +47,6 @@ jobs:
 
     - name: Collect Data
       run: dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
-<<<<<<< Updated upstream
-=======
     
     - name: Combine Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
       uses: danielpalme/ReportGenerator-GitHub-Action@5
@@ -101,7 +99,6 @@ jobs:
       if: always()
       with:
         trx_files: "${{ github.workspace }}/**/*.trx"
->>>>>>> Stashed changes
 
     # - name: SonarQube End
     #   run: dotnet sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
