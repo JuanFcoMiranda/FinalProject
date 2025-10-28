@@ -58,7 +58,7 @@ public class AuditableEntityInterceptorTests
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
       .Options;
 
-        using var context = new TestDbContext(options);
+        await using var context = new TestDbContext(options);
         var entity = new TodoItem
         {
             Title = "Test",
@@ -67,7 +67,7 @@ public class AuditableEntityInterceptorTests
         };
 
         context.TodoItems.Add(entity);
-        await context.SaveChangesAsync();
+        await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         // Modify entity
         entity.Title = "Modified";
