@@ -32,7 +32,7 @@ jobs:
       with:
         global-json-file: global.json
         dotnet-version: ${{ env.DOTNET_VERSION }}
-        cache: true
+        # cache: true
     
     - name: .NET Restore
       run:  dotnet restore
