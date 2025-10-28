@@ -19,7 +19,7 @@ jobs:
       pull-requests: write
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       name: Checkout
       with:
         # Disabling shallow clones is recommended for improving the relevancy of reporting
@@ -28,10 +28,11 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v5
       env:
-        DOTNET_VERSION: 9
+        DOTNET_VERSION: 9.x
       with:
         global-json-file: global.json
         dotnet-version: $DOTNET_VERSION
+        cache: true
     
     - name: .NET Restore
       run:  dotnet restore

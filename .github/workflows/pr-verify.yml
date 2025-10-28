@@ -14,17 +14,18 @@ jobs:
       BUILD_CONFIG: Release
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0   
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v5
         env:
-          DOTNET_VERSION: 9
+          DOTNET_VERSION: 9.x
         with:
           global-json-file: global.json
           dotnet-version: $DOTNET_VERSION
+          cache: true
 
       - name: .NET Restore
         run: dotnet restore --locked-mode
