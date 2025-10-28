@@ -1,6 +1,6 @@
+using FastEndpoints;
 using FinalProject.Application.Common.Models;
 using FinalProject.Application.TodoItems.Queries.GetTodoItemsWithPagination;
-using FastEndpoints;
 
 namespace FinalProject.Web.Endpoints.TodoItems;
 

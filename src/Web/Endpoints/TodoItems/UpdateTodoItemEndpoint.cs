@@ -1,5 +1,5 @@
-using FinalProject.Application.TodoItems.Commands.UpdateTodoItem;
 using FastEndpoints;
+using FinalProject.Application.TodoItems.Commands.UpdateTodoItem;
 
 namespace FinalProject.Web.Endpoints.TodoItems;
 

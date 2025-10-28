@@ -15,15 +15,15 @@ public class TodoItemTests
         {
             Title = "Test Todo",
             Note = "Test Note",
-    Priority = PriorityLevel.High,
-     Reminder = DateTime.Now.AddDays(1)
+            Priority = PriorityLevel.High,
+            Reminder = DateTime.Now.AddDays(1)
         };
 
         // Assert
-     Assert.Equal("Test Todo", todoItem.Title);
- Assert.Equal("Test Note", todoItem.Note);
- Assert.Equal(PriorityLevel.High, todoItem.Priority);
-   Assert.NotNull(todoItem.Reminder);
+        Assert.Equal("Test Todo", todoItem.Title);
+        Assert.Equal("Test Note", todoItem.Note);
+        Assert.Equal(PriorityLevel.High, todoItem.Priority);
+        Assert.NotNull(todoItem.Reminder);
         Assert.False(todoItem.Done);
     }
 
@@ -32,13 +32,13 @@ public class TodoItemTests
     {
         // Arrange
         var todoItem = new TodoItem
-{
-  Title = "Test Todo",
-          Done = false
+        {
+            Title = "Test Todo",
+            Done = false
         };
 
         // Act
-  todoItem.Done = true;
+        todoItem.Done = true;
 
         // Assert
         Assert.True(todoItem.Done);
@@ -49,40 +49,40 @@ public class TodoItemTests
     [Fact]
     public void ShouldNotRaiseTodoItemCompletedEventWhenDoneIsAlreadyTrue()
     {
-     // Arrange
+        // Arrange
         var todoItem = new TodoItem
-      {
-          Title = "Test Todo",
-   Done = true
+        {
+            Title = "Test Todo",
+            Done = true
         };
-      
-  todoItem.ClearDomainEvents();
+
+        todoItem.ClearDomainEvents();
 
         // Act
         todoItem.Done = true;
 
-     // Assert
+        // Assert
         Assert.True(todoItem.Done);
-      Assert.Empty(todoItem.DomainEvents);
+        Assert.Empty(todoItem.DomainEvents);
     }
 
     [Fact]
     public void ShouldNotRaiseTodoItemCompletedEventWhenDoneIsSetToFalse()
-  {
- // Arrange
+    {
+        // Arrange
         var todoItem = new TodoItem
         {
-    Title = "Test Todo",
+            Title = "Test Todo",
             Done = true
-  };
-        
+        };
+
         todoItem.ClearDomainEvents();
 
-  // Act
+        // Act
         todoItem.Done = false;
 
- // Assert
-   Assert.False(todoItem.Done);
+        // Assert
+        Assert.False(todoItem.Done);
         Assert.Empty(todoItem.DomainEvents);
     }
 }

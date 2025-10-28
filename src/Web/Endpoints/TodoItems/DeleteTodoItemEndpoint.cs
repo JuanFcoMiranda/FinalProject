@@ -1,5 +1,5 @@
-using FinalProject.Application.TodoItems.Commands.DeleteTodoItem;
 using FastEndpoints;
+using FinalProject.Application.TodoItems.Commands.DeleteTodoItem;
 
 namespace FinalProject.Web.Endpoints.TodoItems;
 

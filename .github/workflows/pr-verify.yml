@@ -25,7 +25,6 @@ jobs:
         with:
           global-json-file: global.json
           dotnet-version: ${{ env.DOTNET_VERSION }}
-          # cache: true
 
       - name: .NET Restore
         run: dotnet restore --locked-mode
@@ -35,3 +34,6 @@ jobs:
 
       - name: .NET Test
         run: dotnet test --configuration $BUILD_CONFIG --no-build
+
+      - name: .NET Format
+        run: dotnet format -v detailed --verify-no-changes

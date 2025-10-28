@@ -8,11 +8,11 @@ public class ValueObjectTests
     [Fact]
     public void EqualValueObjectsShouldBeEqual()
     {
-  // Arrange
- var colour1 = Colour.White;
+        // Arrange
+        var colour1 = Colour.White;
         var colour2 = Colour.From("#FFFFFF");
 
-      // Act & Assert
+        // Act & Assert
         Assert.Equal(colour1, colour2);
         Assert.True(colour1.Equals(colour2));
     }
@@ -24,7 +24,7 @@ public class ValueObjectTests
         var colour1 = Colour.White;
         var colour2 = Colour.Red;
 
-// Act & Assert
+        // Act & Assert
         Assert.NotEqual(colour1, colour2);
         Assert.False(colour1.Equals(colour2));
     }
@@ -32,7 +32,7 @@ public class ValueObjectTests
     [Fact]
     public void ValueObjectShouldNotEqualNull()
     {
-// Arrange
+        // Arrange
         var colour = Colour.White;
 
         // Act & Assert
@@ -42,9 +42,9 @@ public class ValueObjectTests
     [Fact]
     public void ValueObjectShouldNotEqualDifferentType()
     {
-      // Arrange
+        // Arrange
         var colour = Colour.White;
-      var someString = "test";
+        var someString = "test";
 
         // Act & Assert
         Assert.False(colour.Equals(someString));
@@ -57,7 +57,7 @@ public class ValueObjectTests
         var colour1 = Colour.White;
         var colour2 = Colour.From("#FFFFFF");
 
-  // Act & Assert
+        // Act & Assert
         Assert.Equal(colour1.GetHashCode(), colour2.GetHashCode());
     }
 
@@ -65,8 +65,8 @@ public class ValueObjectTests
     public void DifferentValueObjectsShouldHaveDifferentHashCode()
     {
         // Arrange
-     var colour1 = Colour.White;
-    var colour2 = Colour.Red;
+        var colour1 = Colour.White;
+        var colour2 = Colour.Red;
 
         // Act & Assert
         Assert.NotEqual(colour1.GetHashCode(), colour2.GetHashCode());
