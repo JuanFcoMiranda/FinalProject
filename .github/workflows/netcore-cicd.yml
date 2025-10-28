@@ -31,7 +31,7 @@ jobs:
         DOTNET_VERSION: 9.x
       with:
         global-json-file: global.json
-        dotnet-version: $DOTNET_VERSION
+        dotnet-version: ${{ env.DOTNET_VERSION }}
         cache: true
     
     - name: .NET Restore
