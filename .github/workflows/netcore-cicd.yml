@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BUILD_CONFIG: Release
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     permissions:
       checks: write
       pull-requests: write
@@ -31,7 +32,7 @@ jobs:
         DOTNET_VERSION: 9.x
       with:
         global-json-file: global.json
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        dotnet-version: "$DOTNET_VERSION"
         # cache: true
     
     - name: .NET Restore
@@ -41,7 +42,6 @@ jobs:
       env:
           SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
           SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: | 
           dotnet tool install --global dotnet-sonarscanner
           dotnet tool install --global dotnet-coverage
@@ -59,7 +59,7 @@ jobs:
     - name: SonarQube End
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: dotnet sonarscanner end /d:sonar.token=$GITHUB_TOKEN
+      run: dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
 
     - name: Combine Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
       uses: danielpalme/ReportGenerator-GitHub-Action@5
