@@ -9,31 +9,31 @@ public class BaseEntityTests
 {
     [Fact]
     public void ShouldAddDomainEvent()
-{
+    {
         // Arrange
-  var entity = new TodoItem { Title = "Test" };
+        var entity = new TodoItem { Title = "Test" };
         var domainEvent = new TodoItemCreatedEvent(entity);
 
-     // Act
-     entity.AddDomainEvent(domainEvent);
+        // Act
+        entity.AddDomainEvent(domainEvent);
 
-   // Assert
+        // Assert
         Assert.Single(entity.DomainEvents);
         Assert.Contains(domainEvent, entity.DomainEvents);
     }
 
     [Fact]
     public void ShouldRemoveDomainEvent()
-{
+    {
         // Arrange
-   var entity = new TodoItem { Title = "Test" };
-    var domainEvent = new TodoItemCreatedEvent(entity);
+        var entity = new TodoItem { Title = "Test" };
+        var domainEvent = new TodoItemCreatedEvent(entity);
         entity.AddDomainEvent(domainEvent);
 
-  // Act
+        // Act
         entity.RemoveDomainEvent(domainEvent);
 
-     // Assert
+        // Assert
         Assert.Empty(entity.DomainEvents);
     }
 
@@ -45,25 +45,25 @@ public class BaseEntityTests
         entity.AddDomainEvent(new TodoItemCreatedEvent(entity));
         entity.AddDomainEvent(new TodoItemCompletedEvent(entity));
 
-   // Act
+        // Act
         entity.ClearDomainEvents();
 
         // Assert
         Assert.Empty(entity.DomainEvents);
     }
 
-  [Fact]
+    [Fact]
     public void ShouldReturnReadOnlyCollectionOfDomainEvents()
     {
-      // Arrange
+        // Arrange
         var entity = new TodoItem { Title = "Test" };
- var domainEvent = new TodoItemCreatedEvent(entity);
-    entity.AddDomainEvent(domainEvent);
+        var domainEvent = new TodoItemCreatedEvent(entity);
+        entity.AddDomainEvent(domainEvent);
 
         // Act
         var events = entity.DomainEvents;
 
- // Assert
+        // Assert
         Assert.IsAssignableFrom<IReadOnlyCollection<BaseEvent>>(events);
     }
 }

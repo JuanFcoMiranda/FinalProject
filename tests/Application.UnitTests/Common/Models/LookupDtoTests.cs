@@ -5,18 +5,18 @@ namespace FinalProject.Application.UnitTests.Common.Models;
 
 public class LookupDtoTests
 {
-[Fact]
+    [Fact]
     public void ShouldCreateLookupDtoWithProperties()
     {
         // Act
         var dto = new LookupDto
         {
             Id = 1,
-       Title = "Test Title"
+            Title = "Test Title"
         };
 
         // Assert
-   Assert.Equal(1, dto.Id);
+        Assert.Equal(1, dto.Id);
         Assert.Equal("Test Title", dto.Title);
     }
 
@@ -27,11 +27,11 @@ public class LookupDtoTests
         var dto = new LookupDto
         {
             Id = 1,
-   Title = null
+            Title = null
         };
 
         // Assert
-      Assert.Equal(1, dto.Id);
-     Assert.Null(dto.Title);
+        Assert.Equal(1, dto.Id);
+        Assert.Null(dto.Title);
     }
 }

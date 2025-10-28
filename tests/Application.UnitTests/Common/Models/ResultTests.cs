@@ -9,11 +9,11 @@ public class ResultTests
     public void SuccessShouldCreateSuccessfulResult()
     {
         // Act
-     var result = Result.Success();
+        var result = Result.Success();
 
-    // Assert
-   Assert.True(result.Succeeded);
- Assert.Empty(result.Errors);
+        // Assert
+        Assert.True(result.Succeeded);
+        Assert.Empty(result.Errors);
     }
 
     [Fact]
@@ -26,38 +26,38 @@ public class ResultTests
         var result = Result.Failure(errors);
 
         // Assert
-      Assert.False(result.Succeeded);
-   Assert.Equal(2, result.Errors.Length);
+        Assert.False(result.Succeeded);
+        Assert.Equal(2, result.Errors.Length);
         Assert.Contains("Error 1", result.Errors);
-     Assert.Contains("Error 2", result.Errors);
+        Assert.Contains("Error 2", result.Errors);
     }
 
     [Fact]
     public void FailureShouldCreateFailedResultWithSingleError()
     {
-      // Arrange
+        // Arrange
         var errors = new[] { "Single Error" };
 
         // Act
         var result = Result.Failure(errors);
 
- // Assert
+        // Assert
         Assert.False(result.Succeeded);
         Assert.Single(result.Errors);
-    Assert.Equal("Single Error", result.Errors[0]);
+        Assert.Equal("Single Error", result.Errors[0]);
     }
 
     [Fact]
     public void FailureShouldCreateFailedResultWithNoErrors()
     {
         // Arrange
-      var errors = Array.Empty<string>();
+        var errors = Array.Empty<string>();
 
-// Act
+        // Act
         var result = Result.Failure(errors);
 
         // Assert
         Assert.False(result.Succeeded);
-  Assert.Empty(result.Errors);
+        Assert.Empty(result.Errors);
     }
 }

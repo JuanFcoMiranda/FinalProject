@@ -1,5 +1,5 @@
-using FinalProject.Application.TodoItems.Commands.CreateTodoItem;
 using FastEndpoints;
+using FinalProject.Application.TodoItems.Commands.CreateTodoItem;
 
 namespace FinalProject.Web.Endpoints.TodoItems;
 

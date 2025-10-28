@@ -13,7 +13,7 @@ public class IdentityResultExtensionsTests
         var identityResult = IdentityResult.Success;
 
         // Act
-      var result = identityResult.ToApplicationResult();
+        var result = identityResult.ToApplicationResult();
 
         // Assert
         result.Succeeded.ShouldBeTrue();
@@ -31,43 +31,43 @@ public class IdentityResultExtensionsTests
   };
         var identityResult = IdentityResult.Failed(errors);
 
-      // Act
+        // Act
         var result = identityResult.ToApplicationResult();
 
-      // Assert
+        // Assert
         result.Succeeded.ShouldBeFalse();
         result.Errors.Length.ShouldBe(2);
         result.Errors.ShouldContain("First error");
-   result.Errors.ShouldContain("Second error");
+        result.Errors.ShouldContain("Second error");
     }
 
     [Fact]
     public void ToApplicationResult_WhenFailedWithSingleError_ShouldReturnFailureResult()
     {
         // Arrange
-     var error = new IdentityError { Code = "TestError", Description = "Test error description" };
+        var error = new IdentityError { Code = "TestError", Description = "Test error description" };
         var identityResult = IdentityResult.Failed(error);
 
         // Act
         var result = identityResult.ToApplicationResult();
 
-     // Assert
-   result.Succeeded.ShouldBeFalse();
-    result.Errors.Length.ShouldBe(1);
+        // Assert
+        result.Succeeded.ShouldBeFalse();
+        result.Errors.Length.ShouldBe(1);
         result.Errors[0].ShouldBe("Test error description");
     }
 
     [Fact]
-public void ToApplicationResult_WhenFailedWithNoErrors_ShouldReturnFailureResultWithEmptyErrors()
+    public void ToApplicationResult_WhenFailedWithNoErrors_ShouldReturnFailureResultWithEmptyErrors()
     {
         // Arrange
         var identityResult = IdentityResult.Failed();
 
         // Act
-      var result = identityResult.ToApplicationResult();
+        var result = identityResult.ToApplicationResult();
 
         // Assert
- result.Succeeded.ShouldBeFalse();
+        result.Succeeded.ShouldBeFalse();
         result.Errors.ShouldBeEmpty();
     }
 }

@@ -12,7 +12,7 @@ public static class InitialiserExtensions
 {
     public static async Task InitialiseDatabaseAsync(this WebApplication app)
     {
-   using var scope = app.Services.CreateScope();
+        using var scope = app.Services.CreateScope();
 
         var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
 
@@ -32,7 +32,7 @@ public class ApplicationDbContextInitialiser(
     {
         try
         {
-  await context.Database.MigrateAsync();
+            await context.Database.MigrateAsync();
         }
         catch (Exception ex)
         {
@@ -44,12 +44,12 @@ public class ApplicationDbContextInitialiser(
     public async Task SeedAsync()
     {
         try
-      {
-  await TrySeedAsync();
-    }
-    catch (Exception ex)
         {
-  logger.LogError(ex, "An error occurred while seeding the database.");
+            await TrySeedAsync();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while seeding the database.");
             throw;
         }
     }
@@ -61,23 +61,23 @@ public class ApplicationDbContextInitialiser(
 
         if (roleManager.Roles.All(r => r.Name != administratorRole.Name))
         {
-       await roleManager.CreateAsync(administratorRole);
+            await roleManager.CreateAsync(administratorRole);
         }
 
         // Default users
         var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
 
-    if (userManager.Users.All(u => u.UserName != administrator.UserName))
+        if (userManager.Users.All(u => u.UserName != administrator.UserName))
         {
-          await userManager.CreateAsync(administrator, "Administrator1!");
+            await userManager.CreateAsync(administrator, "Administrator1!");
             if (!string.IsNullOrWhiteSpace(administratorRole.Name))
             {
-       await userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
-}
+                await userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
+            }
         }
 
-  // Default data
+        // Default data
         // TodoList and TodoItem seeding removed since TodoList entity no longer exists
-     // Application now uses independent TodoItems without lists
+        // Application now uses independent TodoItems without lists
     }
 }

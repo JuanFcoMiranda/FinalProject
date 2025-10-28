@@ -37,7 +37,7 @@ public class AuditableEntityInterceptor(
                 {
                     entry.Entity.CreatedBy = user.Id;
                     entry.Entity.Created = utcNow;
-                } 
+                }
                 entry.Entity.LastModifiedBy = user.Id;
                 entry.Entity.LastModified = utcNow;
             }
@@ -48,8 +48,8 @@ public class AuditableEntityInterceptor(
 public static class Extensions
 {
     public static bool HasChangedOwnedEntities(this EntityEntry entry) =>
-        entry.References.Any(r => 
-            r.TargetEntry is not null && 
-            r.TargetEntry.Metadata.IsOwned() && 
+        entry.References.Any(r =>
+            r.TargetEntry is not null &&
+            r.TargetEntry.Metadata.IsOwned() &&
             (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
 }

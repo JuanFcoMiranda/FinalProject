@@ -6,10 +6,10 @@ namespace FinalProject.Domain.UnitTests.Enums;
 public class PriorityLevelTests
 {
     [Fact]
-public void ShouldHaveCorrectValues()
+    public void ShouldHaveCorrectValues()
     {
-  // Assert
-   Assert.Equal(0, (int)PriorityLevel.None);
+        // Assert
+        Assert.Equal(0, (int)PriorityLevel.None);
         Assert.Equal(1, (int)PriorityLevel.Low);
         Assert.Equal(2, (int)PriorityLevel.Medium);
         Assert.Equal(3, (int)PriorityLevel.High);
@@ -17,12 +17,12 @@ public void ShouldHaveCorrectValues()
 
     [Theory]
     [InlineData(PriorityLevel.None)]
- [InlineData(PriorityLevel.Low)]
+    [InlineData(PriorityLevel.Low)]
     [InlineData(PriorityLevel.Medium)]
- [InlineData(PriorityLevel.High)]
+    [InlineData(PriorityLevel.High)]
     public void ShouldBeDefinedEnum(PriorityLevel priority)
     {
-   // Assert
+        // Assert
         Assert.True(Enum.IsDefined(typeof(PriorityLevel), priority));
     }
 }

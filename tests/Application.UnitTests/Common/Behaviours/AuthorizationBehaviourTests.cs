@@ -29,31 +29,31 @@ public class AuthorizationBehaviourTests
     [Fact]
     public async Task Handle_WhenNoAuthorizeAttribute_ShouldCallNext()
     {
- // Arrange
+        // Arrange
         var request = new TestRequestWithoutAuth();
-     var behaviour = new AuthorizationBehaviour<TestRequestWithoutAuth, Unit>(
-    _userMock.Object,
-          _identityServiceMock.Object);
+        var behaviour = new AuthorizationBehaviour<TestRequestWithoutAuth, Unit>(
+       _userMock.Object,
+             _identityServiceMock.Object);
 
-     // Act
+        // Act
         await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
 
-// Assert
- _nextMock.Verify(x => x(), Times.Once);
+        // Assert
+        _nextMock.Verify(x => x(), Times.Once);
     }
 
     [Fact]
     public async Task Handle_WhenUserIsNotAuthenticated_ShouldThrowUnauthorizedAccessException()
     {
         // Arrange
-   var request = new TestRequestWithRole(); // Usar una clase con [Authorize]
+        var request = new TestRequestWithRole(); // Usar una clase con [Authorize]
         var behaviour = new AuthorizationBehaviour<TestRequestWithRole, Unit>(
     _userMock.Object,
      _identityServiceMock.Object);
-        
+
         _userMock.Setup(x => x.Id).Returns((string?)null);
 
-    // Act & Assert
+        // Act & Assert
         await Assert.ThrowsAsync<UnauthorizedAccessException>(() =>
      behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
 
@@ -63,8 +63,8 @@ public class AuthorizationBehaviourTests
     [Fact]
     public async Task Handle_WhenUserIsAuthenticated_AndNoRolesOrPolicies_ShouldCallNext()
     {
-     // Arrange
-     var request = new TestRequestWithEmptyAuthorize();
+        // Arrange
+        var request = new TestRequestWithEmptyAuthorize();
         var behaviour = new AuthorizationBehaviour<TestRequestWithEmptyAuthorize, Unit>(
             _userMock.Object,
      _identityServiceMock.Object);
@@ -79,22 +79,22 @@ public class AuthorizationBehaviourTests
     }
 
     [Fact]
-public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
+    public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
     {
-     // Arrange
+        // Arrange
         var request = new TestRequestWithRole();
-     var behaviour = new AuthorizationBehaviour<TestRequestWithRole, Unit>(
-    _userMock.Object,
-      _identityServiceMock.Object);
+        var behaviour = new AuthorizationBehaviour<TestRequestWithRole, Unit>(
+       _userMock.Object,
+         _identityServiceMock.Object);
 
-    _userMock.Setup(x => x.Id).Returns("test-user-id");
- _userMock.Setup(x => x.Roles).Returns(new List<string> { "Admin" });
+        _userMock.Setup(x => x.Id).Returns("test-user-id");
+        _userMock.Setup(x => x.Roles).Returns(new List<string> { "Admin" });
 
-      // Act
+        // Act
         await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
 
         // Assert
-   _nextMock.Verify(x => x(), Times.Once);
+        _nextMock.Verify(x => x(), Times.Once);
     }
 
     [Fact]
@@ -107,11 +107,11 @@ public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
      _identityServiceMock.Object);
 
         _userMock.Setup(x => x.Id).Returns("test-user-id");
- _userMock.Setup(x => x.Roles).Returns(new List<string> { "User" });
+        _userMock.Setup(x => x.Roles).Returns(new List<string> { "User" });
 
         // Act & Assert
-      await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
- behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
+        await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
+   behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
 
         _nextMock.Verify(x => x(), Times.Never);
     }
@@ -120,7 +120,7 @@ public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
     public async Task Handle_WhenUserHasOneOfMultipleRoles_ShouldCallNext()
     {
         // Arrange
-  var request = new TestRequestWithMultipleRoles();
+        var request = new TestRequestWithMultipleRoles();
         var behaviour = new AuthorizationBehaviour<TestRequestWithMultipleRoles, Unit>(
   _userMock.Object,
             _identityServiceMock.Object);
@@ -129,11 +129,11 @@ public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
         _userMock.Setup(x => x.Roles).Returns(new List<string> { "Manager" });
 
         // Act
-      await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
+        await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
 
-    // Assert
+        // Assert
         _nextMock.Verify(x => x(), Times.Once);
- }
+    }
 
     [Fact]
     public async Task Handle_WhenUserHasNoRoles_ShouldThrowForbiddenAccessException()
@@ -148,22 +148,22 @@ public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
         _userMock.Setup(x => x.Roles).Returns((List<string>?)null);
 
         // Act & Assert
-    await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
-    behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
+        await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
+        behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
 
-    _nextMock.Verify(x => x(), Times.Never);
+        _nextMock.Verify(x => x(), Times.Never);
     }
 
     [Fact]
     public async Task Handle_WhenPolicyIsAuthorized_ShouldCallNext()
     {
- // Arrange
+        // Arrange
         var request = new TestRequestWithPolicy();
         var behaviour = new AuthorizationBehaviour<TestRequestWithPolicy, Unit>(
        _userMock.Object,
  _identityServiceMock.Object);
 
-  _userMock.Setup(x => x.Id).Returns("test-user-id");
+        _userMock.Setup(x => x.Id).Returns("test-user-id");
         _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanEdit"))
             .ReturnsAsync(true);
 
@@ -179,7 +179,7 @@ public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
     public async Task Handle_WhenPolicyIsNotAuthorized_ShouldThrowForbiddenAccessException()
     {
         // Arrange
-   var request = new TestRequestWithPolicy();
+        var request = new TestRequestWithPolicy();
         var behaviour = new AuthorizationBehaviour<TestRequestWithPolicy, Unit>(
             _userMock.Object,
             _identityServiceMock.Object);
@@ -189,8 +189,8 @@ public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
        .ReturnsAsync(false);
 
         // Act & Assert
-     await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
-            behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
+        await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
+               behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
 
         _nextMock.Verify(x => x(), Times.Never);
         _identityServiceMock.Verify(x => x.AuthorizeAsync("test-user-id", "CanEdit"), Times.Once);
@@ -208,26 +208,26 @@ public async Task Handle_WhenUserHasRequiredRole_ShouldCallNext()
         _userMock.Setup(x => x.Id).Returns("test-user-id");
         _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanEdit"))
             .ReturnsAsync(true);
-_identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
-   .ReturnsAsync(true);
+        _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
+           .ReturnsAsync(true);
 
         // Act
         await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
 
         // Assert
         _nextMock.Verify(x => x(), Times.Once);
-     _identityServiceMock.Verify(x => x.AuthorizeAsync("test-user-id", "CanEdit"), Times.Once);
-    _identityServiceMock.Verify(x => x.AuthorizeAsync("test-user-id", "CanDelete"), Times.Once);
+        _identityServiceMock.Verify(x => x.AuthorizeAsync("test-user-id", "CanEdit"), Times.Once);
+        _identityServiceMock.Verify(x => x.AuthorizeAsync("test-user-id", "CanDelete"), Times.Once);
     }
 
- [Fact]
+    [Fact]
     public async Task Handle_WhenOneOfMultiplePoliciesFails_ShouldThrowForbiddenAccessException()
     {
-     // Arrange
+        // Arrange
         var request = new TestRequestWithMultiplePolicies();
-    var behaviour = new AuthorizationBehaviour<TestRequestWithMultiplePolicies, Unit>(
-          _userMock.Object,
-            _identityServiceMock.Object);
+        var behaviour = new AuthorizationBehaviour<TestRequestWithMultiplePolicies, Unit>(
+              _userMock.Object,
+                _identityServiceMock.Object);
 
         _userMock.Setup(x => x.Id).Returns("test-user-id");
         _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanEdit"))
@@ -235,7 +235,7 @@ _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
         _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
             .ReturnsAsync(false);
 
- // Act & Assert
+        // Act & Assert
         await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
         behaviour.Handle(request, _nextMock.Object, CancellationToken.None));
 
@@ -244,7 +244,7 @@ _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
 
     [Fact]
     public async Task Handle_WhenBothRolesAndPoliciesAreRequired_AndBothPass_ShouldCallNext()
-{
+    {
         // Arrange
         var request = new TestRequestWithRoleAndPolicy();
         var behaviour = new AuthorizationBehaviour<TestRequestWithRoleAndPolicy, Unit>(
@@ -252,9 +252,9 @@ _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
   _identityServiceMock.Object);
 
         _userMock.Setup(x => x.Id).Returns("test-user-id");
-     _userMock.Setup(x => x.Roles).Returns(new List<string> { "Admin" });
-    _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanEdit"))
- .ReturnsAsync(true);
+        _userMock.Setup(x => x.Roles).Returns(new List<string> { "Admin" });
+        _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanEdit"))
+     .ReturnsAsync(true);
 
         // Act
         await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
@@ -266,16 +266,16 @@ _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
     [Fact]
     public async Task Handle_WhenRolePassesButPolicyFails_ShouldThrowForbiddenAccessException()
     {
-// Arrange
+        // Arrange
         var request = new TestRequestWithRoleAndPolicy();
- var behaviour = new AuthorizationBehaviour<TestRequestWithRoleAndPolicy, Unit>(
-   _userMock.Object,
-      _identityServiceMock.Object);
+        var behaviour = new AuthorizationBehaviour<TestRequestWithRoleAndPolicy, Unit>(
+          _userMock.Object,
+             _identityServiceMock.Object);
 
         _userMock.Setup(x => x.Id).Returns("test-user-id");
         _userMock.Setup(x => x.Roles).Returns(new List<string> { "Admin" });
-  _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanEdit"))
-   .ReturnsAsync(false);
+        _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanEdit"))
+         .ReturnsAsync(false);
 
         // Act & Assert
         await Assert.ThrowsAsync<ForbiddenAccessException>(() =>
@@ -293,11 +293,11 @@ _identityServiceMock.Setup(x => x.AuthorizeAsync("test-user-id", "CanDelete"))
   _userMock.Object,
        _identityServiceMock.Object);
 
- _userMock.Setup(x => x.Id).Returns("test-user-id");
+        _userMock.Setup(x => x.Id).Returns("test-user-id");
         _userMock.Setup(x => x.Roles).Returns(new List<string> { "Admin" });
 
-   // Act
-   await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
+        // Act
+        await behaviour.Handle(request, _nextMock.Object, CancellationToken.None);
 
         // Assert
         _nextMock.Verify(x => x(), Times.Once);

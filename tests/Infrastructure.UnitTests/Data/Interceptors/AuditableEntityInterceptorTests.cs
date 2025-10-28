@@ -19,10 +19,10 @@ public class AuditableEntityInterceptorTests
     public AuditableEntityInterceptorTests()
     {
         _userMock = new Mock<IUser>();
-      _timeProviderMock = new Mock<TimeProvider>();
+        _timeProviderMock = new Mock<TimeProvider>();
         _testDateTime = new DateTimeOffset(2024, 1, 1, 12, 0, 0, TimeSpan.Zero);
-        
-  _userMock.Setup(x => x.Id).Returns("test-user-id");
+
+        _userMock.Setup(x => x.Id).Returns("test-user-id");
         _timeProviderMock.Setup(x => x.GetUtcNow()).Returns(_testDateTime);
 
         _interceptor = new AuditableEntityInterceptor(_userMock.Object, _timeProviderMock.Object);
@@ -40,38 +40,38 @@ public class AuditableEntityInterceptorTests
         var entity = new TodoItem { Title = "Test" };
         context.TodoItems.Add(entity);
 
-// Act
+        // Act
         _interceptor.UpdateEntities(context);
 
-   // Assert
+        // Assert
         Assert.Equal("test-user-id", entity.CreatedBy);
-   Assert.Equal(_testDateTime, entity.Created);
+        Assert.Equal(_testDateTime, entity.Created);
         Assert.Equal("test-user-id", entity.LastModifiedBy);
         Assert.Equal(_testDateTime, entity.LastModified);
     }
 
     [Fact]
     public async Task SavingChangesAsync_WhenEntityModified_ShouldUpdateLastModifiedProperties()
-  {
-    // Arrange
-    var options = new DbContextOptionsBuilder<TestDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-  .Options;
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<TestDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+      .Options;
 
-    using var context = new TestDbContext(options);
-        var entity = new TodoItem 
-        { 
-  Title = "Test",
+        using var context = new TestDbContext(options);
+        var entity = new TodoItem
+        {
+            Title = "Test",
             CreatedBy = "original-user",
-     Created = DateTimeOffset.UtcNow.AddDays(-1)
+            Created = DateTimeOffset.UtcNow.AddDays(-1)
         };
-   
+
         context.TodoItems.Add(entity);
         await context.SaveChangesAsync();
 
         // Modify entity
         entity.Title = "Modified";
- context.Entry(entity).State = EntityState.Modified;
+        context.Entry(entity).State = EntityState.Modified;
 
         // Act
         _interceptor.UpdateEntities(context);
@@ -93,21 +93,21 @@ public class AuditableEntityInterceptorTests
     [Fact]
     public void UpdateEntities_WhenEntityAdded_ShouldSetCreatedProperties()
     {
-      // Arrange
+        // Arrange
         var options = new DbContextOptionsBuilder<TestDbContext>()
        .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
      .Options;
 
         using var context = new TestDbContext(options);
- var entity = new TodoItem { Title = "Test" };
-  context.TodoItems.Add(entity);
+        var entity = new TodoItem { Title = "Test" };
+        context.TodoItems.Add(entity);
 
         // Act
- _interceptor.UpdateEntities(context);
+        _interceptor.UpdateEntities(context);
 
-     // Assert
+        // Assert
         Assert.Equal("test-user-id", entity.CreatedBy);
-     Assert.Equal(_testDateTime, entity.Created);
+        Assert.Equal(_testDateTime, entity.Created);
         Assert.Equal("test-user-id", entity.LastModifiedBy);
         Assert.Equal(_testDateTime, entity.LastModified);
     }

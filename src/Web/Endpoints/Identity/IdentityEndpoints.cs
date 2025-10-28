@@ -22,7 +22,7 @@ public static class IdentityEndpoints
         // POST /identity/manage/2fa
         // GET /identity/manage/info
         // POST /identity/manage/info
-        
+
         app.MapGroup("/identity")
            .MapIdentityApi<ApplicationUser>()
            .WithTags("Identity");

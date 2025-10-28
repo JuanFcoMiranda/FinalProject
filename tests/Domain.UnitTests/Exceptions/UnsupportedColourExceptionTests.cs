@@ -9,13 +9,13 @@ public class UnsupportedColourExceptionTests
     public void ShouldCreateExceptionWithCorrectMessage()
     {
         // Arrange
- const string code = "#INVALID";
+        const string code = "#INVALID";
 
         // Act
         var exception = new UnsupportedColourException(code);
 
-   // Assert
-   Assert.Equal("Colour \"#INVALID\" is unsupported.", exception.Message);
+        // Assert
+        Assert.Equal("Colour \"#INVALID\" is unsupported.", exception.Message);
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public class UnsupportedColourExceptionTests
         // Act
         var exception = new UnsupportedColourException("#TEST");
 
- // Assert
-  Assert.IsAssignableFrom<Exception>(exception);
+        // Assert
+        Assert.IsAssignableFrom<Exception>(exception);
     }
 }
