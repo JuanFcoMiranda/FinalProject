@@ -6,39 +6,33 @@ on:
       - master
       - main
 
-permissions:
-  checks: write
-  pull-requests: write
-
-env:
-  SCANNER_VERSION: 10.x
-  BUILD_CONFIG: Release
+# env:
+#   SCANNER_VERSION: 10.x
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      build_config: Release
-    
+      BUILD_CONFIG: Release
     permissions:
-      contents: read
       checks: write
       pull-requests: write
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       name: Checkout
       with:
         # Disabling shallow clones is recommended for improving the relevancy of reporting
         fetch-depth: 0
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       env:
         DOTNET_VERSION: 9.x
       with:
         global-json-file: global.json
-        dotnet-version: $DOTNET_VERSION
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        cache: true
     
     - name: .NET Restore
       run:  dotnet restore
