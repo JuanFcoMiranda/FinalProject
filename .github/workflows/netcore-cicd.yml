@@ -42,21 +42,26 @@ jobs:
     - name: .NET Restore
       run:  dotnet restore
 
-    # - name: Install Tools
-    #   run: | 
-          # dotnet tool install --global dotnet-sonarscanner
-          # dotnet tool install --global dotnet-coverage
-          # dotnet sonarscanner begin /o:${{ secrets.SONAR_ORGANIZATION }} /k:${{ secrets.SONAR_PROJECT_KEY }} /d:sonar.token=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+    - name: Install Tools
+      run: | 
+          dotnet tool install --global dotnet-sonarscanner
+          dotnet tool install --global dotnet-coverage
+          dotnet sonarscanner begin /o:${{ secrets.SONAR_ORGANIZATION }} /k:${{ secrets.SONAR_PROJECT_KEY }} /d:sonar.token=${{ secrets.SONAR_TOKEN }} /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
     
     - name: .NET Build
       run: dotnet build --configuration $BUILD_CONFIG --no-restore
     
     - name: .NET Test with Coverage
       run: dotnet test --configuration $BUILD_CONFIG --no-build --logger trx --collect:"XPlat Code Coverage" 
-
-    # - name: Collect Data
-    #   run: dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
     
+    - name: Collect Data
+      run: dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
+
+    - name: SonarQube End
+      run: dotnet sonarscanner end /d:sonar.token=${{ secrets.SONAR_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Combine Coverage Reports # This is because one report is produced per project, and we want one result for all of them.
       uses: danielpalme/ReportGenerator-GitHub-Action@5
       with:
