@@ -6,14 +6,12 @@ on:
       - master
       - main
 
-env:
-  DOTNET_VERSION: 9.x
-  BUILD_CONFIG: Release
-
 jobs:
   build:
     name: PR Verify
     runs-on: ubuntu-latest
+    env:
+      BUILD_CONFIG: Release
 
     steps:
       - uses: actions/checkout@v4
@@ -21,10 +19,12 @@ jobs:
           fetch-depth: 0   
 
       - name: Set up .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
+        env:
+          DOTNET_VERSION: 9
         with:
           global-json-file: global.json
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: $DOTNET_VERSION
 
       - name: .NET Restore
         run: dotnet restore --locked-mode
