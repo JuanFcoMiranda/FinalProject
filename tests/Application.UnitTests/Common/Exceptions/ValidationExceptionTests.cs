@@ -1,5 +1,5 @@
-﻿using FluentValidation.Results;
-using FinalProject.Application.Common.Exceptions;
+﻿using FinalProject.Application.Common.Exceptions;
+using FluentValidation.Results;
 using Shouldly;
 
 namespace FinalProject.Application.UnitTests.Common.Exceptions;

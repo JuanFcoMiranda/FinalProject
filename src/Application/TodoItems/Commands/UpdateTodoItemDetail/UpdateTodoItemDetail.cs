@@ -5,7 +5,7 @@ namespace FinalProject.Application.TodoItems.Commands.UpdateTodoItemDetail;
 
 public record UpdateTodoItemDetailCommand : IRequest
 {
-  public int Id { get; init; }
+    public int Id { get; init; }
 
     public PriorityLevel Priority { get; init; }
 
@@ -19,9 +19,9 @@ public class UpdateTodoItemDetailCommandHandler(IApplicationDbContext context) :
         var entity = await context.TodoItems
   .FindAsync([request.Id], cancellationToken);
 
-     Guard.Against.NotFound(request.Id, entity);
+        Guard.Against.NotFound(request.Id, entity);
 
-     entity.Priority = request.Priority;
+        entity.Priority = request.Priority;
         entity.Note = request.Note;
 
         await context.SaveChangesAsync(cancellationToken);

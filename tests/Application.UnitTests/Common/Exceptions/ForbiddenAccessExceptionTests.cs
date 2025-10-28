@@ -8,21 +8,21 @@ public class ForbiddenAccessExceptionTests
     [Fact]
     public void ShouldCreateForbiddenAccessException()
     {
- // Act
-    var exception = new ForbiddenAccessException();
+        // Act
+        var exception = new ForbiddenAccessException();
 
         // Assert
         Assert.NotNull(exception);
         Assert.IsType<ForbiddenAccessException>(exception);
     }
 
-  [Fact]
+    [Fact]
     public void ShouldBeExceptionType()
     {
-// Act
+        // Act
         var exception = new ForbiddenAccessException();
 
-      // Assert
-   Assert.IsAssignableFrom<Exception>(exception);
+        // Assert
+        Assert.IsAssignableFrom<Exception>(exception);
     }
 }

@@ -22,7 +22,7 @@ public class Testing : IAsyncLifetime
         _database = await TestDatabaseFactory.CreateAsync();
 
         _factory = new CustomWebApplicationFactory(
-            _database.GetConnection(), 
+            _database.GetConnection(),
             _database.GetConnectionString(),
             () => _userId,
             () => _roles);
@@ -52,7 +52,7 @@ public class Testing : IAsyncLifetime
     {
         return _userId;
     }
-    
+
     public List<string>? GetRoles()
     {
         return _roles;

@@ -10,33 +10,33 @@ public class TodoItemEventsTests
     public void TodoItemCreatedEventShouldHoldItemReference()
     {
         // Arrange
- var todoItem = new TodoItem { Title = "Test Todo" };
+        var todoItem = new TodoItem { Title = "Test Todo" };
 
         // Act
-   var domainEvent = new TodoItemCreatedEvent(todoItem);
+        var domainEvent = new TodoItemCreatedEvent(todoItem);
 
         // Assert
         Assert.NotNull(domainEvent.Item);
- Assert.Equal(todoItem, domainEvent.Item);
-   Assert.Equal("Test Todo", domainEvent.Item.Title);
+        Assert.Equal(todoItem, domainEvent.Item);
+        Assert.Equal("Test Todo", domainEvent.Item.Title);
     }
 
     [Fact]
-public void TodoItemCompletedEventShouldHoldItemReference()
+    public void TodoItemCompletedEventShouldHoldItemReference()
     {
         // Arrange
-     var todoItem = new TodoItem
+        var todoItem = new TodoItem
         {
-    Title = "Test Todo",
-Done = true
-      };
+            Title = "Test Todo",
+            Done = true
+        };
 
         // Act
-    var domainEvent = new TodoItemCompletedEvent(todoItem);
+        var domainEvent = new TodoItemCompletedEvent(todoItem);
 
         // Assert
         Assert.NotNull(domainEvent.Item);
-    Assert.Equal(todoItem, domainEvent.Item);
+        Assert.Equal(todoItem, domainEvent.Item);
         Assert.True(domainEvent.Item.Done);
     }
 
@@ -44,13 +44,13 @@ Done = true
     public void TodoItemDeletedEventShouldHoldItemReference()
     {
         // Arrange
-      var todoItem = new TodoItem { Title = "Test Todo" };
+        var todoItem = new TodoItem { Title = "Test Todo" };
 
         // Act
         var domainEvent = new TodoItemDeletedEvent(todoItem);
 
         // Assert
-   Assert.NotNull(domainEvent.Item);
+        Assert.NotNull(domainEvent.Item);
         Assert.Equal(todoItem, domainEvent.Item);
     }
 }
