@@ -39,13 +39,13 @@ jobs:
 
     - name: Install Tools
       env:
-          SONAR_ORGANIZATION: ${{ secrets.EXAMPLE_SECRET }}
+          SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
           SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: | 
           dotnet tool install --global dotnet-sonarscanner
           dotnet tool install --global dotnet-coverage
-          dotnet sonarscanner begin /o:$SONAR_ORGANIZATION /k:$SONAR_PROJECT_KEY /d:sonar.token=$SONAR_TOKEN /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          dotnet sonarscanner begin /o:"$SONAR_ORGANIZATION" /k:"$SONAR_PROJECT_KEY" /d:sonar.token="$SONAR_TOKEN" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
     
     - name: .NET Build
       run: dotnet build --configuration $BUILD_CONFIG --no-restore
