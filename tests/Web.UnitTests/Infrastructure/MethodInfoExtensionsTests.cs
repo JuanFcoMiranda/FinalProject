@@ -75,12 +75,6 @@ public class MethodInfoExtensionsTests
         Assert.Null(exception);
     }
 
-    // Helper methods
-    public void TestMethod()
-    {
-        // Test method
-    }
-
     private static int NamedMethod(int x)
     {
         return x * 2;
