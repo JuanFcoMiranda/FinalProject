@@ -75,7 +75,8 @@ public class MethodInfoExtensionsTests
     }
 
     // Helper methods
-    private void TestMethod()
+    [Fact]
+    public void TestMethod()
     {
         // Test method
     }
