@@ -6,8 +6,10 @@ on:
       - master
       - main
 
-# env:
-#   SCANNER_VERSION: 10.x
+env:
+  AZURE_CONTAINER_REGISTRY: your-acr-name # Cambia esto por tu ACR name
+  IMAGE_NAME: finalproject-web
+  RESOURCE_GROUP: your-resource-group # Cambia esto por tu resource group
 
 jobs:
   build:
@@ -118,8 +120,57 @@ jobs:
         name: web_site
         path: ./src/Publish
 
+  build-and-push-docker:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    
+    steps:
+    - uses: actions/checkout@v5
+      name: Checkout
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Azure
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    
+    - name: Log in to Azure Container Registry
+      run: |
+        az acr login --name ${{ env.AZURE_CONTAINER_REGISTRY }}
+    
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=registry,ref=${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:buildcache
+        cache-to: type=registry,ref=${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:buildcache,mode=max
+
   deploy:
-      needs: build
+      needs: [build, build-and-push-docker]
       runs-on: ubuntu-latest
       steps:
       - name: Download Site
@@ -127,3 +178,14 @@ jobs:
         with:
           name: web_site
           path: web_site
+      
+      # Opcional: Deploy del contenedor a Azure Container Instances o App Service
+      # - name: Deploy to Azure Container Instances
+      #   uses: azure/aci-deploy@v1
+      #   with:
+      #     resource-group: ${{ env.RESOURCE_GROUP }}
+      #     dns-name-label: finalproject-${{ github.run_number }}
+      #     image: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+      #     registry-login-server: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+      #     name: finalproject-container
+      #     location: 'eastus'

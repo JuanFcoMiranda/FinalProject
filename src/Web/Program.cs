@@ -29,6 +29,29 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
+    // En producción, ejecutar migraciones si la variable de entorno está configurada
+    var runMigrations = builder.Configuration.GetValue("RUN_MIGRATIONS", false);
+    if (runMigrations)
+    {
+        app.Logger.LogInformation("RUN_MIGRATIONS is enabled. Running database initialization...");
+        
+        try
+        {
+            await app.InitialiseDatabaseAsync();
+            app.Logger.LogInformation("Database initialization completed successfully.");
+        }
+        catch (Exception ex)
+        {
+            app.Logger.LogError(ex, "An error occurred while initializing the database. The application will continue to start, but database operations may fail.");
+            // No lanzamos la excepción para que el contenedor no se detenga inmediatamente
+            // Esto permite ver los logs y diagnosticar el problema
+        }
+    }
+    else
+    {
+        app.Logger.LogInformation("RUN_MIGRATIONS is disabled. Skipping database initialization.");
+    }
+    
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
