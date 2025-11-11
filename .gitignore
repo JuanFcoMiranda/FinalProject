@@ -483,3 +483,6 @@ $RECYCLE.BIN/
 
 # JetBrains
 .idea/
+
+# Docker environment files with secrets
+.env

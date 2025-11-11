@@ -32,7 +32,12 @@ public class ApplicationDbContextInitialiser(
     {
         try
         {
+            logger.LogInformation("Ensuring database exists...");
+
+            // Esto crea la base de datos si no existe Y aplica todas las migraciones pendientes
             await context.Database.MigrateAsync();
+
+            logger.LogInformation("Database is ready and up to date.");
         }
         catch (Exception ex)
         {

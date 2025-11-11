@@ -1,0 +1,63 @@
+**/.dockerignore
+````````
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/.idea
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+**/azds.yaml
+**/bin
+**/charts
+**/docker-compose*
+**/Dockerfile*
+**/node_modules
+**/npm-debug.log
+**/obj
+**/secrets.dev.yaml
+**/values.dev.yaml
+LICENSE
+README.md
+**/*.md
+**/coverage
+**/.coverage
+**/artifacts
+**/.sonarqube
+
+# Exclude test projects
+**/tests/**
+**/TestResults/**
+**/*Tests.csproj
+**/*Test.csproj
+**/*.Tests/**
+**/*.Test/**
+
+# Exclude documentation
+docs/**
+**/*.md
+!src/**/*.md
+
+# Exclude CI/CD files
+.github/**
+.azure/**
+azure-pipelines.yml
+.gitlab-ci.yml
+
+# Exclude database files
+**/*.db
+**/*.sqlite
+**/*.mdf
+**/*.ldf
+
+# Exclude temporary files
+**/tmp/**
+**/temp/**
+**/.tmp
+**/.temp
