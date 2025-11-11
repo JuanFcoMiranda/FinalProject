@@ -169,6 +169,20 @@ jobs:
         cache-from: type=registry,ref=${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:buildcache
         cache-to: type=registry,ref=${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:buildcache,mode=max
 
+    - name: Scan Docker image for vulnerabilities with Trivy
+      uses: aquasecurity/trivy-action@v0.13.0
+      with:
+        image-ref: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
+        format: 'table'
+        exit-code: '0' # Cambia a '1' si quieres que falle el pipeline ante vulnerabilidades
+        output: 'trivy-report.txt'
+
+    - name: Upload Trivy scan report
+      uses: actions/upload-artifact@v5
+      with:
+        name: trivy-report
+        path: trivy-report.txt
+
   deploy:
       needs: [build, build-and-push-docker]
       runs-on: ubuntu-latest

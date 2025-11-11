@@ -2,6 +2,9 @@ using FastEndpoints;
 using FinalProject.Application;
 using FinalProject.Infrastructure.Data;
 using Scalar.AspNetCore;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Metrics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +16,25 @@ builder.Services.AddApplicationServices();
 builder.Services.AddFastEndpoints();
 builder.Services.AddOpenApi();
 
+// --- OpenTelemetry configuration ---
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing => tracing
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("FinalProject.Web"))
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddSqlClientInstrumentation()
+    )
+    .WithMetrics(metrics => metrics
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("FinalProject.Web"))
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddPrometheusExporter()
+    );
+
 var app = builder.Build();
+
+// Endpoint Prometheus
+app.MapPrometheusScrapingEndpoint();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
