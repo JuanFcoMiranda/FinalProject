@@ -1,6 +1,9 @@
 using FastEndpoints;
 using FinalProject.Application;
 using FinalProject.Infrastructure.Data;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -55,7 +58,7 @@ else
     if (runMigrations)
     {
         app.Logger.LogInformation("RUN_MIGRATIONS is enabled. Running database initialization...");
-        
+
         try
         {
             await app.InitialiseDatabaseAsync();
@@ -72,7 +75,7 @@ else
     {
         app.Logger.LogInformation("RUN_MIGRATIONS is disabled. Skipping database initialization.");
     }
-    
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
