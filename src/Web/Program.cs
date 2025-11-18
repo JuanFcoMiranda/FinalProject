@@ -48,7 +48,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference(options =>
     {
         options.WithTitle("FinalProject API")
-              .WithDarkMode(true);
+              .EnableDarkMode();
     });
 }
 else

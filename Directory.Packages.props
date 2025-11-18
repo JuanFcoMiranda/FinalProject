@@ -19,12 +19,12 @@
     <PackageVersion Include="FastEndpoints" Version="$(FastEndpointsVersion)" />
     <PackageVersion Include="FastEndpoints.Swagger" Version="$(FastEndpointsVersion)" />
     <PackageVersion Include="NSwag.AspNetCore" Version="$(NSwagVersion)" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus" Version="1.3.0-rc.2" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.13.1-beta.1" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.13.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.13.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.13.0" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.13.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus" Version="$(OpenTelemetryExporterPrometheusVersion)" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="$(OpenTelemetryExporterPrometheusAspNetCoreVersion)" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryExtensionsHostingVersion)" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryInstrumentationAspNetCoreVersion)" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="$(OpenTelemetryInstrumentationHttpVersion)" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="$(OpenTelemetryInstrumentationSqlClientVersion)" />
     <PackageVersion Include="Scalar.AspNetCore" Version="$(ScalarAspNetCoreVersion)" />
     <!-- Microsoft ASP.NET Core -->
     <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(MicrosoftExtensionsVersion)" />
