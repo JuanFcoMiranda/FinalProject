@@ -36,12 +36,12 @@
     <NSwagVersion>14.2.0</NSwagVersion>
 
     <!-- OpenTelemetry versions -->
-    <OpenTelemetry_Exporter_Prometheus_Version>1.3.0-rc.2</OpenTelemetry_Exporter_Prometheus_Version>
-    <OpenTelemetry_Exporter_Prometheus_AspNetCore_Version>1.13.1-beta.1</OpenTelemetry_Exporter_Prometheus_AspNetCore_Version>
-    <OpenTelemetry_Extensions_Hosting_Version>1.13.1</OpenTelemetry_Extensions_Hosting_Version>
-    <OpenTelemetry_Instrumentation_AspNetCore_Version>1.13.0</OpenTelemetry_Instrumentation_AspNetCore_Version>
-    <OpenTelemetry_Instrumentation_Http_Version>1.13.0</OpenTelemetry_Instrumentation_Http_Version>
-    <OpenTelemetry_Instrumentation_SqlClient_Version>1.13.0-beta.2</OpenTelemetry_Instrumentation_SqlClient_Version>
+    <OpenTelemetryExporterPrometheusVersion>1.3.0-rc.2</OpenTelemetryExporterPrometheusVersion>
+    <OpenTelemetryExporterPrometheusAspNetCoreVersion>1.13.1-beta.1</OpenTelemetryExporterPrometheusAspNetCoreVersion>
+    <OpenTelemetryExtensionsHostingVersion>1.13.1</OpenTelemetryExtensionsHostingVersion>
+    <OpenTelemetryInstrumentationAspNetCoreVersion>1.13.0</OpenTelemetryInstrumentationAspNetCoreVersion>
+    <OpenTelemetryInstrumentationHttpVersion>1.13.0</OpenTelemetryInstrumentationHttpVersion>
+    <OpenTelemetryInstrumentationSqlClientVersion>1.13.0-beta.2</OpenTelemetryInstrumentationSqlClientVersion>
 
     <!-- Azure -->
     <AzureConfigurationSecretsVersion>1.3.1</AzureConfigurationSecretsVersion>

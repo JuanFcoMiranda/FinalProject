@@ -19,12 +19,12 @@
     <PackageVersion Include="FastEndpoints" Version="$(FastEndpointsVersion)" />
     <PackageVersion Include="FastEndpoints.Swagger" Version="$(FastEndpointsVersion)" />
     <PackageVersion Include="NSwag.AspNetCore" Version="$(NSwagVersion)" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus" Version="$(OpenTelemetry_Exporter_Prometheus_Version)" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="$(OpenTelemetry_Exporter_Prometheus_AspNetCore_Version)" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetry_Extensions_Hosting_Version)" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetry_Instrumentation_AspNetCore_Version)" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="$(OpenTelemetry_Instrumentation_Http_Version)" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="$(OpenTelemetry_Instrumentation_SqlClient_Version)" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus" Version="$(OpenTelemetryExporterPrometheusVersion)" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="$(OpenTelemetryExporterPrometheusAspNetCoreVersion)" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryExtensionsHostingVersion)" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryInstrumentationAspNetCoreVersion)" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="$(OpenTelemetryInstrumentationHttpVersion)" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.SqlClient" Version="$(OpenTelemetryInstrumentationSqlClientVersion)" />
     <PackageVersion Include="Scalar.AspNetCore" Version="$(ScalarAspNetCoreVersion)" />
     <!-- Microsoft ASP.NET Core -->
     <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(MicrosoftExtensionsVersion)" />
