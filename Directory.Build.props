@@ -1,7 +1,7 @@
 ﻿<!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
 <Project>
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <!--<ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>-->
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -11,13 +11,13 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <!-- Core Framework Versions -->
     <AspireVersion>9.5.1</AspireVersion>
-    <AspnetVersion>9.0.10</AspnetVersion>
-    <DotnetVersion>9.0.10</DotnetVersion>
-    <MicrosoftExtensionsVersion>9.0.10</MicrosoftExtensionsVersion>
+    <AspnetVersion>10.0.0</AspnetVersion>
+    <DotnetVersion>10.0.0</DotnetVersion>
+    <MicrosoftExtensionsVersion>10.0.0</MicrosoftExtensionsVersion>
 
     <!-- Database & Data Access -->
     <DataSqlClientVesion>5.2.2</DataSqlClientVesion>
-    <EntityFrameworkCoreVersion>9.0.10</EntityFrameworkCoreVersion>
+    <EntityFrameworkCoreVersion>10.0.0</EntityFrameworkCoreVersion>
 
     <!-- Architecture & Patterns -->
     <GuardClausesVersion>5.0.0</GuardClausesVersion>
@@ -32,7 +32,7 @@
 
     <!-- API & Documentation -->
     <FastEndpointsVersion>5.31.0</FastEndpointsVersion>
-    <ScalarAspNetCoreVersion>1.2.42</ScalarAspNetCoreVersion>
+    <ScalarAspNetCoreVersion>2.10.3</ScalarAspNetCoreVersion>
     <NSwagVersion>14.2.0</NSwagVersion>
 
     <!-- Azure -->
@@ -55,7 +55,7 @@
     <TestcontainersMsSqlVersion>4.8.0</TestcontainersMsSqlVersion>
 
     <!-- System -->
-    <SystemConfigurationVersion>9.0.10</SystemConfigurationVersion>
+    <SystemConfigurationVersion>10.0.0</SystemConfigurationVersion>
   </PropertyGroup>
 
 </Project>
