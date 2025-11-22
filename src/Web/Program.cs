@@ -2,7 +2,10 @@ using FastEndpoints;
 using FinalProject.Application;
 using FinalProject.Infrastructure.Data;
 using OpenTelemetry.Metrics;
+using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 
